@@ -67,3 +67,41 @@
     border: none;
     outline: none;
 }
+.date {
+    position: absolute;
+    bottom: 0;
+    transform: translate(0, 100%);
+}
+.options {
+    position: absolute;
+    bottom: 0;
+    transform: translate(0, 100%);
+    background-color: #fff;
+    color: gray;
+    border: 3px solid yellow;
+    border-radius: 5px;
+}
+.optionItem {
+    width: 200px;
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.optionCounter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    color: black;
+}
+.optionCounterButton {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #0071c2;
+    color: #0071c2;
+    cursor: pointer;
+    background-color: #fff;
+}
+.optionCounterButton:disabled {
+    cursor: not-allowed;
+}
