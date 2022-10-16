@@ -3,6 +3,8 @@ import Footer from './../../components/footer/Footer'
 import MailList from './../../components/mailList/MailList'
 import Navbar from './../../components/navbar/Navbar'
 import Header from './../../components/header/Header'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
 const Hotel = () => {
     const photos = [
         {
@@ -29,9 +31,37 @@ const Hotel = () => {
             <Navbar />
             <Header type='list' />
             <div className='hotelContainer'>
-                {photos.map((item) => (
-                    <img src={item.src} />
-                ))}
+                <div className='hotelWrapper'>
+                    <button className='bookNow'>Reserve or book now!</button>
+                    <h1 className='hotelTitle'>Grand Hotel</h1>
+                    <div className='hotelAddress'>
+                        <FontAwesomeIcon icon={faLocationDot} />
+                        <span>Elton St 125 New York</span>
+                    </div>
+                    <span className='hotelDistance'>Excellent location 500m from center</span>
+                    <span className='hotelPriceHighlight'>
+                        Book a stay over $114 at this property and get a free airport taxi
+                    </span>
+                    <div className='hotelImages'>
+                        {photos.map((item) => (
+                            <div className='hotelImgWrapper'>
+                                <img alt='' src={item.src} className='hotelImg' />
+                            </div>
+                        ))}
+                    </div>
+                    <div className='hotelDetails'>
+                        <div className='hotelDetailsText'>
+                            <h2>Stay in the heart of Krakow </h2>
+                            <p className='hotelDesc'>Located a 5-minute walk from St. Florian's Gate Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, corrupti molestias dolores optio repellendus ad corporis architecto doloribus veniam quae illum ullam delectus culpa amet obcaecati at nostrum omnis exercitationem, voluptatem aut sit totam perspiciatis? Animi facere quas perferendis? Maxime, esse? Molestiae velit nihil facere excepturi debitis culpa! Sunt, aut?</p>
+                        </div>
+                        <div className='hotelDetailsPrice'>
+                            <h2>Perfect for a 9-nights stay!</h2>
+                            <span>Located in the real heart of Krakow, this property has an excellent location score of 9.8!</span>
+                            <h2 className='hotelDetailsOffer'>$945 (9 nights)</h2>
+                            <button>Reserve or book now!</button>
+                        </div>
+                    </div>
+                </div>
                 <MailList />
                 <Footer />
             </div>
