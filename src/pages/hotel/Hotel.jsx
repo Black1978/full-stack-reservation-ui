@@ -4,8 +4,32 @@ import MailList from './../../components/mailList/MailList'
 import Navbar from './../../components/navbar/Navbar'
 import Header from './../../components/header/Header'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
+import {
+    faLocationDot,
+    faCircleXmark,
+    faArrowRight,
+    faArrowLeft,
+} from '@fortawesome/free-solid-svg-icons'
+import { useState } from 'react'
 const Hotel = () => {
+    const [slideNumber, setSlideNumber] = useState(0)
+    const [open, setOpen] = useState(false)
+    const handleOpen = (i) => {
+        setSlideNumber(i)
+        setOpen(!open)
+    }
+    const handleClose = () => {
+        setOpen(false)
+    }
+    const handleArrow = (direction) => {
+        let newSlideNumber
+        if (direction === 'l') {
+            newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1
+        } else {
+            newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1
+        }
+        setSlideNumber(newSlideNumber)
+    }
     const photos = [
         {
             src: 'https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707778.jpg?k=56ba0babbcbbfeb3d3e911728831dcbc390ed2cb16c51d88159f82bf751d04c6&o=&hp=1',
@@ -31,6 +55,28 @@ const Hotel = () => {
             <Navbar />
             <Header type='list' />
             <div className='hotelContainer'>
+                {open && (
+                    <div className='slider'>
+                        <FontAwesomeIcon
+                            icon={faCircleXmark}
+                            className='close'
+                            onClick={handleClose}
+                        />
+                        <FontAwesomeIcon
+                            icon={faArrowLeft}
+                            className='arrow'
+                            onClick={() => handleArrow('l')}
+                        />
+                        <div className='sliderImgWrapper'>
+                            <img src={photos[slideNumber].src} alt='' className='sliderImg' />
+                        </div>
+                        <FontAwesomeIcon
+                            icon={faArrowRight}
+                            className='arrow'
+                            onClick={() => handleArrow('r')}
+                        />
+                    </div>
+                )}
                 <div className='hotelWrapper'>
                     <button className='bookNow'>Reserve or book now!</button>
                     <h1 className='hotelTitle'>Grand Hotel</h1>
@@ -43,20 +89,36 @@ const Hotel = () => {
                         Book a stay over $114 at this property and get a free airport taxi
                     </span>
                     <div className='hotelImages'>
-                        {photos.map((item) => (
+                        {photos.map((item, i) => (
                             <div className='hotelImgWrapper'>
-                                <img alt='' src={item.src} className='hotelImg' />
+                                <img
+                                    alt=''
+                                    src={item.src}
+                                    className='hotelImg'
+                                    onClick={() => handleOpen(i)}
+                                />
                             </div>
                         ))}
                     </div>
                     <div className='hotelDetails'>
                         <div className='hotelDetailsText'>
                             <h2>Stay in the heart of Krakow </h2>
-                            <p className='hotelDesc'>Located a 5-minute walk from St. Florian's Gate Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, corrupti molestias dolores optio repellendus ad corporis architecto doloribus veniam quae illum ullam delectus culpa amet obcaecati at nostrum omnis exercitationem, voluptatem aut sit totam perspiciatis? Animi facere quas perferendis? Maxime, esse? Molestiae velit nihil facere excepturi debitis culpa! Sunt, aut?</p>
+                            <p className='hotelDesc'>
+                                Located a 5-minute walk from St. Florian's Gate Lorem ipsum dolor
+                                sit amet consectetur adipisicing elit. Ipsam, corrupti molestias
+                                dolores optio repellendus ad corporis architecto doloribus veniam
+                                quae illum ullam delectus culpa amet obcaecati at nostrum omnis
+                                exercitationem, voluptatem aut sit totam perspiciatis? Animi facere
+                                quas perferendis? Maxime, esse? Molestiae velit nihil facere
+                                excepturi debitis culpa! Sunt, aut?
+                            </p>
                         </div>
                         <div className='hotelDetailsPrice'>
                             <h2>Perfect for a 9-nights stay!</h2>
-                            <span>Located in the real heart of Krakow, this property has an excellent location score of 9.8!</span>
+                            <span>
+                                Located in the real heart of Krakow, this property has an excellent
+                                location score of 9.8!
+                            </span>
                             <h2 className='hotelDetailsOffer'>$945 (9 nights)</h2>
                             <button>Reserve or book now!</button>
                         </div>
